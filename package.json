@@ -1,0 +1,28 @@
+{
+  "name": "html-webpack-inline-runtime-plugin",
+  "version": "1.0.0",
+  "description": "Inline your webpack runtime chunk when using html-webpack-plugin.",
+  "main": "dist/index.js",
+  "repository": "https://github.com/chippers/html-webpack-inline-runtime-plugin",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write index.ts package.json tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/html-minifier": "^3.5.3",
+    "@types/tapable": "^1.0.4",
+    "@types/webpack": "^4.39.2",
+    "html-webpack-plugin": "~4.0.0-beta.8",
+    "prettier": "~1.18.2",
+    "typescript": "3.6.3",
+    "webpack": "^4.0.0"
+  },
+  "peerDependencies": {
+    "html-webpack-plugin": ">=4.0.0-beta.8 <5"
+  },
+  "files": [
+    "/dist",
+    "/LICENSE",
+    "/README.md"
+  ]
+}
