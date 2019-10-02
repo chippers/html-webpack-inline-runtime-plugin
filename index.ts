@@ -74,7 +74,7 @@ function getRuntimeChunkOption(compiler: Compiler) {
 }
 
 // Find the publicPath setting from the current Compilation
-function getPublicPath(compilation: Compilation): string {
+function getPublicPath(compilation: Compilation) {
   let path = compilation.outputOptions && compilation.outputOptions.publicPath;
 
   // Append a trailing slash if one does not exist
@@ -86,7 +86,7 @@ function getPublicPath(compilation: Compilation): string {
 }
 
 // Find all the runtimeChunks from the current compilation's entries
-function getRuntimeUris(compilation: Compilation): RuntimeUri[] {
+function getRuntimeUris(compilation: Compilation) {
   const publicPath = getPublicPath(compilation);
 
   return Array.from(compilation.entrypoints.values())
@@ -96,10 +96,10 @@ function getRuntimeUris(compilation: Compilation): RuntimeUri[] {
 }
 
 // Find the asset tags that match a RuntimeUri
-function runtimeTags(runtimes: RuntimeUri[]) {
+function runtimeTags(runtimeUris: RuntimeUri[]) {
   return function(acc: RuntimeTag[], tag: HtmlTagObject) {
     if (tag.attributes.hasOwnProperty("src")) {
-      let match = runtimes.find(runtime => runtime.url === tag.attributes.src);
+      let match = runtimeUris.find(uri => uri.url === tag.attributes.src);
 
       // We only want to match tags that are related to a runtime asset
       if (match) {
