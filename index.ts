@@ -120,9 +120,9 @@ function getAssetContent(compilation: Compilation, file: string) {
 }
 
 // Replace remote asset source with inline runtime asset content
-function inlineContent(comp: Compilation) {
+function inlineContent(compilation: Compilation) {
   return function([tag, runtime]: RuntimeTag) {
-    const content = getAssetContent(comp, runtime.file);
+    const content = getAssetContent(compilation, runtime.file);
     if (content) {
       tag.innerHTML = content;
       delete tag.attributes.src;
