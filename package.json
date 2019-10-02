@@ -4,6 +4,20 @@
   "description": "Inline your webpack runtime chunk(s) when using html-webpack-plugin.",
   "repository": "https://github.com/chippers/html-webpack-inline-runtime-plugin",
   "license": "MIT",
+  "author": {
+    "name": "Chip Reed",
+    "email": "chip@chip.sh",
+    "url": "https://chip.sh"
+  },
+  "main": "index.js",
+  "files": [
+    "/index.ts",
+    "/index.js",
+    "/index.js.map",
+    "/index.d.ts",
+    "/LICENSE",
+    "/README.md"
+  ],
   "scripts": {
     "prepare": "tsc",
     "format": "prettier --write index.ts package.json tsconfig.json"
@@ -18,14 +32,5 @@
   },
   "peerDependencies": {
     "html-webpack-plugin": ">=4.0.0-beta.8 <5"
-  },
-  "main": "dist/index.js",
-  "files": [
-    "/index.ts",
-    "/index.js",
-    "/index.js.map",
-    "/index.d.ts",
-    "/LICENSE",
-    "/README.md"
-  ]
+  }
 }
