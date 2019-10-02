@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Inline your webpack runtime chunk(s) when using html-webpack-plugin.",
   "repository": "https://github.com/chippers/html-webpack-inline-runtime-plugin",
+  "keywords": ["webpack", "html-webpack-plugin"],
   "license": "MIT",
   "author": {
     "name": "Chip Reed",
@@ -14,9 +15,7 @@
     "/index.ts",
     "/index.js",
     "/index.js.map",
-    "/index.d.ts",
-    "/LICENSE",
-    "/README.md"
+    "/index.d.ts"
   ],
   "scripts": {
     "prepare": "tsc",

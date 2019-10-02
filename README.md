@@ -38,5 +38,5 @@ module.exports = {
 ```
 
 
-[optimization.runtimeChunk]: (https://webpack.js.org/configuration/optimization/#optimizationruntimechunk)
-[`html-webpack-plugin`]: (https://github.com/jantimon/html-webpack-plugin)
+[optimization.runtimeChunk]: https://webpack.js.org/configuration/optimization/#optimizationruntimechunk
+[`html-webpack-plugin`]: https://github.com/jantimon/html-webpack-plugin
