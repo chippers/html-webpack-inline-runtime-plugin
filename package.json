@@ -1,11 +1,11 @@
 {
   "name": "html-webpack-inline-runtime-plugin",
   "version": "1.0.0",
-  "description": "Inline your webpack runtime chunk when using html-webpack-plugin.",
-  "main": "dist/index.js",
+  "description": "Inline your webpack runtime chunk(s) when using html-webpack-plugin.",
   "repository": "https://github.com/chippers/html-webpack-inline-runtime-plugin",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "format": "prettier --write index.ts package.json tsconfig.json"
   },
   "devDependencies": {
@@ -19,6 +19,7 @@
   "peerDependencies": {
     "html-webpack-plugin": ">=4.0.0-beta.8 <5"
   },
+  "main": "dist/index.js",
   "files": [
     "/dist",
     "/LICENSE",
