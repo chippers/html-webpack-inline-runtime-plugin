@@ -3,6 +3,7 @@ import { Compiler, compilation } from "webpack";
 import Compilation = compilation.Compilation;
 import HtmlWebpackPlugin, { Hooks, HtmlTagObject } from "html-webpack-plugin";
 import { Source } from "webpack-sources";
+import { createHash } from "crypto";
 
 // FIXME: HtmlWebpackPlugin typing definitions seem to be broken
 interface HtmlWebpackPluginConstructor {
@@ -15,9 +16,18 @@ interface RuntimeUri {
   url: string;
 }
 
+interface Options {
+  csp?: boolean;
+}
+
 // Webpack plugin to automatically inline runtime chunks
 class HtmlWebpackInlineRuntimePlugin {
   NAME = "HtmlWebpackInlineRuntimePlugin";
+  options: Options;
+
+  constructor(options?: Options) {
+    this.options = options || {};
+  }
 
   apply(compiler: Compiler) {
     compiler.hooks.compilation.tap(this.NAME, (compilation: Compilation) => {
@@ -35,9 +45,14 @@ class HtmlWebpackInlineRuntimePlugin {
           const runtimeUris = getRuntimeUris(compilation);
 
           // Apply inlining to tags that refer to runtime chunks
-          data.assetTags.scripts
+          const hashes = data.assetTags.scripts
             .reduce(runtimeTags(runtimeUris), [])
-            .forEach(inlineContent(compilation));
+            .reduce(inlineContent(compilation, this.options), []);
+
+          if (this.options.csp) {
+            // Add the inline csp hashes to the meta tags
+            data.assetTags.meta.push(cspMetaTag(hashes));
+          }
 
           return data;
         });
@@ -120,12 +135,40 @@ function getAssetContent(compilation: Compilation, file: string) {
 }
 
 // Replace remote asset source with inline runtime asset content
-function inlineContent(compilation: Compilation) {
-  return function([tag, runtime]: RuntimeTag) {
+function inlineContent(compilation: Compilation, options: Options) {
+  return function(hashes: string[], [tag, runtime]: RuntimeTag) {
     const content = getAssetContent(compilation, runtime.file);
     if (content) {
       tag.innerHTML = content;
       delete tag.attributes.src;
+
+      if (options.csp) {
+        // Add the content hash to the meta tags to allow for CSP policies
+        hashes.push(cspHash(content));
+      }
+    }
+
+    return hashes;
+  };
+}
+
+// Hash input and format it as a CSP hash value
+function cspHash(input: string) {
+  let hash = createHash("sha256")
+    .update(input)
+    .digest("base64");
+
+  return `'sha256-${hash}'`;
+}
+
+// Create a CSP meta tag to allow inline script source
+function cspMetaTag(hashes: string[]): HtmlTagObject {
+  return {
+    tagName: "meta",
+    voidTag: true,
+    attributes: {
+      "http-equiv": "Content-Security-Policy",
+      content: `script-src 'self' ${hashes.join(" ")}`
     }
   };
 }
