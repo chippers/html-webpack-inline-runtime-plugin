@@ -1,2 +1,7 @@
-dist/
+# Dependencies
 node_modules/
+
+# Built files
+/index.js
+/index.js.map
+/index.d.ts
