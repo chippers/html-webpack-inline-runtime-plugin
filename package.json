@@ -1,6 +1,6 @@
 {
   "name": "html-webpack-inline-runtime-plugin",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Inline your webpack runtime chunk(s) when using html-webpack-plugin.",
   "repository": "https://github.com/chippers/html-webpack-inline-runtime-plugin",
   "keywords": [
