@@ -25,14 +25,14 @@
     "format": "prettier --write index.ts package.json tsconfig.json"
   },
   "devDependencies": {
-    "@types/html-minifier": "^3.0.0",
+    "@types/html-minifier-terser": "^5.0.0",
     "@types/webpack": "^4.0.0",
-    "html-webpack-plugin": "~4.0.0-beta.8",
-    "prettier": "^1.18.2",
-    "typescript": "~3.6.3",
+    "html-webpack-plugin": "^4.0.0",
+    "prettier": "^2.0.0",
+    "typescript": "^3.0.0",
     "webpack": "^4.0.0"
   },
   "peerDependencies": {
-    "html-webpack-plugin": ">=4.0.0-beta.8 <5"
+    "html-webpack-plugin": ">=4.0.0 <5"
   }
 }
