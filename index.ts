@@ -35,7 +35,7 @@ class HtmlWebpackInlineRuntimePlugin {
 
       findHtmlWebpackPlugin(compiler)
         .getHooks(compilation)
-        .alterAssetTags.tapPromise(this.NAME, async data => {
+        .alterAssetTags.tapPromise(this.NAME, async (data) => {
           // Do nothing if there is no runtimeChunk option set
           if (!runtimeChunkOption) {
             return data;
@@ -64,7 +64,7 @@ class HtmlWebpackInlineRuntimePlugin {
 function findHtmlWebpackPlugin(compiler: Compiler) {
   if (compiler.options.plugins) {
     const plugin = compiler.options.plugins
-      .filter(plugin => plugin.constructor.name === HtmlWebpackPlugin.name)
+      .filter((plugin) => plugin.constructor.name === HtmlWebpackPlugin.name)
       .pop();
 
     if (plugin) {
@@ -112,9 +112,9 @@ function getRuntimeUris(compilation: Compilation) {
 
 // Find the asset tags that match a RuntimeUri
 function runtimeTags(runtimeUris: RuntimeUri[]) {
-  return function(acc: RuntimeTag[], tag: HtmlTagObject) {
+  return function (acc: RuntimeTag[], tag: HtmlTagObject) {
     if (tag.attributes.hasOwnProperty("src")) {
-      let match = runtimeUris.find(uri => uri.url === tag.attributes.src);
+      let match = runtimeUris.find((uri) => uri.url === tag.attributes.src);
 
       // We only want to match tags that are related to a runtime asset
       if (match) {
@@ -136,7 +136,7 @@ function getAssetContent(compilation: Compilation, file: string) {
 
 // Replace remote asset source with inline runtime asset content
 function inlineContent(compilation: Compilation, options: Options) {
-  return function(hashes: string[], [tag, runtime]: RuntimeTag) {
+  return function (hashes: string[], [tag, runtime]: RuntimeTag) {
     const content = getAssetContent(compilation, runtime.file);
     if (content) {
       tag.innerHTML = content;
@@ -154,9 +154,7 @@ function inlineContent(compilation: Compilation, options: Options) {
 
 // Hash input and format it as a CSP hash value
 function cspHash(input: string) {
-  let hash = createHash("sha256")
-    .update(input)
-    .digest("base64");
+  let hash = createHash("sha256").update(input).digest("base64");
 
   return `'sha256-${hash}'`;
 }
@@ -168,8 +166,8 @@ function cspMetaTag(hashes: string[]): HtmlTagObject {
     voidTag: true,
     attributes: {
       "http-equiv": "Content-Security-Policy",
-      content: `script-src 'self' ${hashes.join(" ")}`
-    }
+      content: `script-src 'self' ${hashes.join(" ")}`,
+    },
   };
 }
 
