@@ -105,7 +105,11 @@ function getRuntimeUris(compilation: Compilation) {
   const publicPath = getPublicPath(compilation);
 
   return Array.from(compilation.entrypoints.values())
-    .reduce((acc, entry) => acc.concat(entry.runtimeChunk.files), [])
+    .reduce((acc, entry) => {
+      const files = entry.runtimeChunk.files.values();
+      acc.push(...files);
+      return acc;
+    }, [])
     .filter((filename: string) => filename.length > 0)
     .map((file: string) => ({ file, url: publicPath + file }));
 }
