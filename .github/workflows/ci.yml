@@ -1,0 +1,22 @@
+name: ci
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  build:
+    name: build (node v${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ "12", "13", "14" ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: install node v${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: install yarn
+        run: npm install -g yarn@1
+      - run: yarn
