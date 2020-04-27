@@ -1,5 +1,8 @@
 # html-webpack-inline-runtime-plugin
 
+![github actions](https://github.com/chippers/html-webpack-inline-runtime-plugin/workflows/ci/badge.svg)
+![npm](https://img.shields.io/npm/v/html-webpack-inline-runtime-plugin.svg)
+
 Automatically creates inline scripts for your runtime chunk(s) based on your
 `runtimeChunk` setting in the `optimization` key of webpack settings.  Requires
 [`html-webpack-plugin`]. 
