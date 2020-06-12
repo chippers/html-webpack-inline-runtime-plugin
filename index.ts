@@ -134,7 +134,7 @@ function runtimeTags(runtimeUris: RuntimeUri[]) {
 function getAssetContent(compilation: Compilation, file: string) {
   return Object.entries<Source>(compilation.assets)
     .filter(([asset, _]) => asset === file)
-    .map(([_, content]) => content.source())
+    .map(([_, content]) => content.source({}) as string)
     .pop();
 }
 
