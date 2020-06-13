@@ -25,9 +25,7 @@
     "format": "prettier --write index.ts package.json tsconfig.json"
   },
   "devDependencies": {
-    "@types/html-minifier-terser": "^5.0.0",
     "@types/webpack": "^4.0.0",
-    "@types/webpack-sources": "^1.4.0",
     "html-webpack-plugin": "^4.0.0",
     "prettier": "^2.0.0",
     "typescript": "^3.0.0",
